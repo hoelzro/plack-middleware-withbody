@@ -43,7 +43,7 @@ test_psgi $wrapped_app, sub {
     my $res;
 
     $res = $cb->(GET '/');
-    is_deeply \@bodies, [''];
+    is_deeply \@bodies, [];
     is $res->content, '';
 
     @bodies = ();
