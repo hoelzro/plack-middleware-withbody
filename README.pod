@@ -1,0 +1,81 @@
+=pod
+
+=head1 NAME
+
+Plack::Middleware::WithBody
+
+=head1 VERSION
+
+version 0.01
+
+=head1 SYNOPSIS
+
+  package Plack::Middleware::MyMiddleware;
+  use strict;
+  use warnings;
+  use parent 'Plack::Middleware::WithBody';
+
+  sub want_request_body {
+    return 1; # defaults to 0
+  }
+
+  sub want_response_body {
+    return 1; # defaults to 0
+  }
+
+  sub get_request_chunk_callback {
+    my ( $self ) = @_;
+
+    return sub {
+        my ( $chunk ) = @_;
+
+        if(defined $chunk) {
+          # do something with the chunk here
+        } else {
+          # end of stream
+        }
+    };
+  }
+
+  sub get_response_chunk_callback {
+    my ( $self ) = @_;
+
+    return sub {
+        my ( $chunk ) = @_;
+
+        if(defined $chunk) {
+          # do something with the chunk here
+        } else {
+          # end of stream
+        }
+    };
+  }
+
+=head1 DESCRIPTION
+
+=head1 METHODS
+
+=head1 SEE ALSO
+
+L<Plack::Middleware::WithBody::Simple>
+
+=head1 AUTHOR
+
+Rob Hoelz <rob@hoelz.ro>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by Rob Hoelz.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website
+https://github.com/hoelzro/plack-middleware-withbody/issues
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
