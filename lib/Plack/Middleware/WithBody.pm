@@ -140,14 +140,57 @@ sub want_response_body {
 
 __END__
 
-# ABSTRACT:  A short description of Plack::Middleware::WithBody
+# ABSTRACT: A base class for middleware that want to inspect request/response bodies
 
 =head1 SYNOPSIS
 
+  package Plack::Middleware::MyMiddleware;
+  use strict;
+  use warnings;
+  use parent 'Plack::Middleware::WithBody';
+
+  sub want_request_body {
+    return 1; # defaults to 0
+  }
+
+  sub want_response_body {
+    return 1; # defaults to 0
+  }
+
+  sub get_request_chunk_callback {
+    my ( $self ) = @_;
+
+    return sub {
+        my ( $chunk ) = @_;
+
+        if(defined $chunk) {
+          # do something with the chunk here
+        } else {
+          # end of stream
+        }
+    };
+  }
+
+  sub get_response_chunk_callback {
+    my ( $self ) = @_;
+
+    return sub {
+        my ( $chunk ) = @_;
+
+        if(defined $chunk) {
+          # do something with the chunk here
+        } else {
+          # end of stream
+        }
+    };
+  }
+
 =head1 DESCRIPTION
 
-=head1 FUNCTIONS
+=head1 METHODS
 
 =head1 SEE ALSO
+
+L<Plack::Middleware::WithBody::Simple>
 
 =cut
